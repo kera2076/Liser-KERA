@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>KERA | محاكي أطوال موجات الليزر وتصنيف البشرة</title>
+  <meta name="description" content="محاكي فيزياء الليزر وطب الجلدية التفاعلي ثلاثي الأبعاد: مقياس فيتزباتريك، أطوال الموجات، حسابات التحلل الضوئي الحراري الانتقائي ومحاكاة حروق البشرة الداكنة.">
+  
+  <!-- Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css?v=4.0">
+  <style>
+    body, button, input, select {
+      font-family: 'Cairo', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .kera-badge, .laser-tag, .param-value, .gauge-temp, .session-metric {
+      font-family: 'Space Grotesk', 'Cairo', sans-serif;
+    }
+    .ltr-text {
+      direction: ltr;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header with KERA Branding -->
+  <header class="app-header">
+    <div class="brand-section">
+      <div class="kera-logo">
+        <span class="kera-badge">KERA</span>
+        <div class="brand-title">
+          <h1>محاكي أطوال موجات الليزر وتصنيف البشرة</h1>
+          <span class="subtitle ltr-text">CLINICAL LASER PHOTOTHERMOLYSIS &amp; FITZPATRICK SIMULATOR</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-status">
+      <div class="status-chip">
+        <span class="status-dot"></span>
+        <span class="status-text">النظام البصري معاير وجاهز</span>
+      </div>
+      <button id="audioToggleBtn" class="audio-toggle-btn" title="تفعيل/كتم الأصوات الطبية">
+        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        <span class="audio-text">الصوت مفعّل</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Segmented Navigation Bar (Visible on phones & tablets) -->
+  <nav class="mobile-nav-bar" id="mobileNav">
+    <button class="mobile-tab-btn active" data-tab="tab-viewport">
+      <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+      <span>المحاكي 3D والنبضة</span>
+    </button>
+    <button class="mobile-tab-btn" data-tab="tab-controls">
+      <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+      <span>معايير الليزر والجلد</span>
+    </button>
+    <button class="mobile-tab-btn" data-tab="tab-telemetry">
+      <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+      <span>التحليل والنتائج</span>
+    </button>
+  </nav>
+
+  <!-- Main Simulator Layout -->
+  <main class="app-layout" id="appLayout">
+
+    <!-- Left Control Panel: Clinical Parameters -->
+    <aside class="side-panel" id="panelControls">
+      
+      <!-- Quick Clinical Scenarios -->
+      <div class="panel-section">
+        <div class="section-header">
+          <span class="section-title">
+            <span>سيناريوهات سريرية تعليمية</span>
+            <span class="badge">جاهزة</span>
+          </span>
+        </div>
+        <div class="preset-scenarios-bar">
+          <button class="scenario-chip" data-scenario="ideal-fair">بشرة فاتحة + 755nm</button>
+          <button class="scenario-chip" data-scenario="burn-hazard" style="border-color: rgba(255,23,68,0.5); color: #ff5252;">خطر حرق: داكنة + 755nm</button>
+          <button class="scenario-chip" data-scenario="gold-standard-dark" style="border-color: rgba(171,71,188,0.5); color: #ce93d8;">المعيار الذهبي: داكنة + 1064nm</button>
+          <button class="scenario-chip" data-scenario="blonde-challenge">شعر أبيض / رمادي</button>
+        </div>
+      </div>
+
+      <!-- 1. Fitzpatrick Skin Type Scale -->
+      <div class="panel-section">
+        <div class="section-header">
+          <span class="section-title">
+            <span>مقياس فيتزباتريك (نوع البشرة)</span>
+            <span class="badge ltr-text">Fitzpatrick I - VI</span>
+          </span>
+        </div>
+
+        <div class="slider-container">
+          <div class="slider-labels">
+            <span>النوع الأول (I)</span>
+            <span>النوع السادس (VI)</span>
+          </div>
+          <input type="range" id="fitzSlider" min="1" max="6" step="1" value="3">
+        </div>
+
+        <!-- Visual Color Swatches -->
+        <div class="fitz-swatch-bar">
+          <div class="fitz-swatch" data-type="1" style="background-color: #faeae3;" title="Type I"></div>
+          <div class="fitz-swatch" data-type="2" style="background-color: #f3dcce;" title="Type II"></div>
+          <div class="fitz-swatch active" data-type="3" style="background-color: #e0bf9d;" title="Type III"></div>
+          <div class="fitz-swatch" data-type="4" style="background-color: #be9568;" title="Type IV"></div>
+          <div class="fitz-swatch" data-type="5" style="background-color: #8a5c36;" title="Type V"></div>
+          <div class="fitz-swatch" data-type="6" style="background-color: #432918;" title="Type VI"></div>
+        </div>
+
+        <!-- Fitzpatrick Info Card -->
+        <div class="fitz-info-card">
+          <div class="skin-title" id="fitzName">النوع الثالث (III) - حنطية فاتحة / متوسطة</div>
+          <div class="skin-desc" id="fitzDesc">بشرة حنطية شائعة في حوض المتوسط، تحترق باعتدال وتسمر تدريجياً.</div>
+        </div>
+      </div>
+
+      <!-- 2. Hair Morphology (Thickness & Pigment) -->
+      <div class="panel-section">
+        <div class="section-header">
+          <span class="section-title">
+            <span>خصائص بصيلة الشعرة</span>
+            <span class="badge ltr-text">Target Chromophore</span>
+          </span>
+        </div>
+
+        <!-- Thickness Options -->
+        <div style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: -4px;">سُمك الشعرة (قطر الجذع):</div>
+        <div class="option-grid">
+          <button class="choice-btn thickness-btn" data-thickness="fine">
+            <strong>وبرية</strong>
+            <span class="ltr-text" style="font-size: 0.68rem; opacity: 0.7;">Fine</span>
+          </button>
+          <button class="choice-btn thickness-btn active" data-thickness="medium">
+            <strong>متوسطة</strong>
+            <span class="ltr-text" style="font-size: 0.68rem; opacity: 0.7;">Medium</span>
+          </button>
+          <button class="choice-btn thickness-btn" data-thickness="coarse">
+            <strong>سميكة</strong>
+            <span class="ltr-text" style="font-size: 0.68rem; opacity: 0.7;">Coarse</span>
+          </button>
+        </div>
+
+        <!-- Color Options -->
+        <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 6px; margin-bottom: -4px;">لون الشعرة (الميلانين المستهدف):</div>
+        <div class="option-grid option-grid-4">
+          <button class="choice-btn color-btn active" data-color="black">
+            <span class="color-dot" style="background: #141110;"></span>
+            <span>أسود داكن</span>
+          </button>
+          <button class="choice-btn color-btn" data-color="brown">
+            <span class="color-dot" style="background: #4a2c1b;"></span>
+            <span>بني</span>
+          </button>
+          <button class="choice-btn color-btn" data-color="blonde">
+            <span class="color-dot" style="background: #bfa063;"></span>
+            <span>أشقر / أحمر</span>
+          </button>
+          <button class="choice-btn color-btn" data-color="white">
+            <span class="color-dot" style="background: #e0e0e0;"></span>
+            <span>أبيض / رمادي</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. Laser Wavelength Selection -->
+      <div class="panel-section">
+        <div class="section-header">
+          <span class="section-title">
+            <span>طول موجة الليزر المستخدم</span>
+            <span class="badge ltr-text">Wavelength</span>
+          </span>
+        </div>
+
+        <div class="laser-card-list">
+          <!-- Alexandrite 755nm -->
+          <div class="laser-card" data-wavelength="755">
+            <div class="laser-info">
+              <h4 style="color: var(--laser-755);">
+                <span style="display:inline-block; width:8px; height:8px; background:var(--laser-755); border-radius:50%;"></span>
+                ألكسندرايت (Alexandrite)
+              </h4>
+              <span class="laser-spec">عمق نفاذية ~2.4mm | امتصاص ميلانين فائق</span>
+            </div>
+            <span class="laser-tag ltr-text" style="background: rgba(255, 23, 68, 0.15); color: var(--laser-755);">755 nm</span>
+          </div>
+
+          <!-- Diode 808nm -->
+          <div class="laser-card active-808" data-wavelength="808">
+            <div class="laser-info">
+              <h4 style="color: #ff5252;">
+                <span style="display:inline-block; width:8px; height:8px; background:#ff5252; border-radius:50%;"></span>
+                دايود (Diode Laser)
+              </h4>
+              <span class="laser-spec">عمق نفاذية ~3.8mm | متوازن وشامل</span>
+            </div>
+            <span class="laser-tag ltr-text" style="background: rgba(213, 0, 0, 0.15); color: #ff5252;">808 nm</span>
+          </div>
+
+          <!-- Nd:YAG 1064nm -->
+          <div class="laser-card" data-wavelength="1064">
+            <div class="laser-info">
+              <h4 style="color: var(--laser-1064);">
+                <span style="display:inline-block; width:8px; height:8px; background:var(--laser-1064); border-radius:50%;"></span>
+                إندياج (Nd:YAG Laser)
+              </h4>
+              <span class="laser-spec">عمق نفاذية ~5.5mm | آمن للبشرة الداكنة</span>
+            </div>
+            <span class="laser-tag ltr-text" style="background: rgba(171, 71, 188, 0.15); color: var(--laser-1064);">1064 nm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Energy Parameters & Cooling -->
+      <div class="panel-section">
+        <div class="section-header">
+          <span class="section-title">
+            <span>معايير الطاقة والتبريد السريري</span>
+            <span class="badge ltr-text">Dosimetry</span>
+          </span>
+        </div>
+
+        <div class="param-grid">
+          <div class="param-box">
+            <div class="param-title">
+              <span>طاقة الجول (Fluence)</span>
+              <span id="fluenceValue" class="ltr-text">28 J/cm²</span>
+            </div>
+            <input type="range" id="fluenceSlider" min="10" max="50" step="2" value="28" style="margin-top:6px;">
+          </div>
+          <div class="param-box">
+            <div class="param-title">
+              <span>مدة النبضة (Pulse)</span>
+              <span id="pulseValue" class="ltr-text">30 ms</span>
+            </div>
+            <input type="range" id="pulseSlider" min="5" max="100" step="5" value="30" style="margin-top:6px;">
+          </div>
+        </div>
+
+        <!-- Epidermal Cooling Switch -->
+        <div class="switch-row">
+          <div>
+            <div style="font-size: 0.8rem; font-weight: 600;">تبريد البشرة السطحي (Dynamic Cooling)</div>
+            <div style="font-size: 0.7rem; color: var(--text-muted);">حماية البشرة بغاز التبريد أو رأس الياقوت المثلج</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="coolingToggle" checked>
+            <span class="slider-switch"></span>
+          </label>
+        </div>
+
+        <!-- Slow-Motion Simulation Switch -->
+        <div class="switch-row" style="margin-top: 6px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px;">
+          <div>
+            <div style="font-size: 0.8rem; font-weight: 600; color: var(--brand-cyan);">وضع العرض البطيء (Slow-Motion 0.35x)</div>
+            <div style="font-size: 0.7rem; color: var(--text-muted);">إبطاء حركة النبضة لمشاهدة اختراق الفوتونات وموجة الحرارة بوضوح</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="slowMoToggle">
+            <span class="slider-switch"></span>
+          </label>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Center Viewport: Procedural 3D WebGL Scene -->
+    <section class="viewport-area active-mobile-view" id="panelViewport">
+      
+      <!-- Top Viewport Controls -->
+      <div class="viewport-overlay-top">
+        <div class="view-preset-buttons">
+          <button class="view-btn active" data-view="cross">مقطع ثلاثي الأبعاد</button>
+          <button class="view-btn" data-view="top">السطح من الأعلى</button>
+          <button class="view-btn" data-view="bulb">تكبير البصيلة</button>
+        </div>
+        <div class="viewport-hint">
+          <span>⟳ تدوير 360° | تكبير بالماوس واللمس</span>
+        </div>
+      </div>
+
+      <!-- Floating Anatomical Layer Tags -->
+      <div class="anatomical-hud-tags">
+        <div class="hud-tag" style="top: 22%; left: 14px;">
+          <span class="hud-dot" style="background:#00e5ff;"></span>
+          <span>البشرة السطحية (Epidermis ~0.1mm)</span>
+        </div>
+        <div class="hud-tag" style="top: 44%; left: 14px;">
+          <span class="hud-dot" style="background:#ff5252;"></span>
+          <span>الأدمة والأوعية (Dermis ~3.5mm)</span>
+        </div>
+        <div class="hud-tag" style="top: 68%; left: 14px;">
+          <span class="hud-dot" style="background:#ffb300;"></span>
+          <span>النسيج الدهني وجذر البصيلة (Adipose &amp; Bulb)</span>
+        </div>
+      </div>
+
+      <!-- Three.js Canvas Container -->
+      <div id="viewport3d" class="viewport-3d-canvas-container"></div>
+
+      <!-- Mobile Quick Controls Strip (Allows switching skin/laser without leaving 3D tab) -->
+      <div class="mobile-quick-strip">
+        <div class="mobile-quick-group">
+          <span class="quick-label">البشرة:</span>
+          <div class="quick-swatches">
+            <button class="quick-swatch-btn" data-type="1" style="background:#faeae3;" title="Type I"></button>
+            <button class="quick-swatch-btn" data-type="2" style="background:#f3dcce;" title="Type II"></button>
+            <button class="quick-swatch-btn active" data-type="3" style="background:#e0bf9d;" title="Type III"></button>
+            <button class="quick-swatch-btn" data-type="4" style="background:#be9568;" title="Type IV"></button>
+            <button class="quick-swatch-btn" data-type="5" style="background:#8a5c36;" title="Type V"></button>
+            <button class="quick-swatch-btn" data-type="6" style="background:#432918;" title="Type VI"></button>
+          </div>
+        </div>
+        <div class="mobile-quick-group">
+          <span class="quick-label">الليزر:</span>
+          <div class="quick-lasers">
+            <button class="quick-laser-btn" data-wl="755" style="color:var(--laser-755);">755nm</button>
+            <button class="quick-laser-btn active" data-wl="808" style="color:#ff5252;">808nm</button>
+            <button class="quick-laser-btn" data-wl="1064" style="color:var(--laser-1064);">1064nm</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Trigger Bar -->
+      <div class="viewport-overlay-bottom">
+        <button id="fireLaserBtn" class="btn-fire-laser">
+          <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+          <span>إطلاق نبضة الليزر (FIRE LASER)</span>
+          <span class="fire-shortcut ltr-text">[Space]</span>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- Right Telemetry & Outcomes Column -->
+    <aside class="telemetry-column" id="panelTelemetry">
+      
+      <!-- 1. Real-Time Safety & Burn Hazard Banner -->
+      <div id="safetyBanner" class="safety-banner safe">
+        <div class="safety-banner-head" id="safetyBannerTitle">✓ الوضع آمن ومتوافق سريرياً</div>
+        <div class="safety-banner-desc" id="safetyBannerDesc">
+          معايير ممتازة. يتم تدمير البصيلة بأمان دون تعريض البشرة لخطر الحروق.
+        </div>
+      </div>
+
+      <!-- 2. Thermal Gauges -->
+      <div class="panel-section">
+        <div class="section-header">
+          <span class="section-title">
+            <span>درجات الحرارة الناتجة</span>
+            <span class="badge ltr-text">Thermal Telemetry</span>
+          </span>
+        </div>
+
+        <div class="gauge-grid">
+          <!-- Epidermal Surface Temp -->
+          <div class="gauge-card">
+            <div class="gauge-label">سطح البشرة (Epidermis)</div>
+            <div class="gauge-temp ltr-text" id="epidermalTemp" style="color: #34d399;">35.0°C</div>
+            <div class="gauge-bar-track">
+              <div class="gauge-bar-fill" id="epidermalFill" style="width: 25%; background-color: #10b981;"></div>
+            </div>
+            <div class="ltr-text" style="font-size: 0.68rem; color: var(--text-muted); margin-top: 4px;">Burn Threshold: &gt;65°C</div>
+          </div>
+
+          <!-- Hair Bulb Temp -->
+          <div class="gauge-card">
+            <div class="gauge-label">بصيلة وجذر الشعرة (Bulb)</div>
+            <div class="gauge-temp ltr-text" id="bulbTemp" style="color: #34d399;">35.0°C</div>
+            <div class="gauge-bar-track">
+              <div class="gauge-bar-fill" id="bulbFill" style="width: 70%; background-color: #10b981;"></div>
+            </div>
+            <div class="ltr-text" style="font-size: 0.68rem; color: var(--text-muted); margin-top: 4px;">Destruction: &gt;70°C</div>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; padding: 6px 8px; background: rgba(0,0,0,0.35); border-radius:4px;">
+          <span style="color:var(--text-secondary);">كفاءة التحلل الحراري (Efficacy):</span>
+          <span id="efficacyVal" class="ltr-text" style="font-weight:700; color:var(--brand-cyan);">100%</span>
+        </div>
+      </div>
+
+      <!-- 3. Cumulative Session Clinical Stats Card -->
+      <div class="panel-section">
+        <div class="section-header">
+          <span class="section-title">
+            <span>سجل الجلسة السريرية التراكمي</span>
+            <span class="badge">Session Stats</span>
+          </span>
+          <button id="resetSessionBtn" class="btn-text-action" title="تصفير الجلسة">تصفير</button>
+        </div>
+        <div class="session-stats-grid">
+          <div class="session-stat-box">
+            <span class="stat-num session-metric" id="statPulsesCount">0</span>
+            <span class="stat-lbl">إجمالي النبضات</span>
+          </div>
+          <div class="session-stat-box">
+            <span class="stat-num session-metric" id="statTotalJoules">0 J</span>
+            <span class="stat-lbl">مجموع الطاقة</span>
+          </div>
+          <div class="session-stat-box">
+            <span class="stat-num session-metric" id="statDestroyedCount" style="color:#10b981;">0</span>
+            <span class="stat-lbl">بصيلات مدمرة</span>
+          </div>
+          <div class="session-stat-box">
+            <span class="stat-num session-metric" id="statMaxTemp" style="color:#00e5ff;">35.0°C</span>
+            <span class="stat-lbl">أعلى حرارة سطح</span>
+          </div>
+        </div>
+        <button id="viewFullReportBtn" class="btn-full-report">
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+          <span>عرض التقرير السريري الشامل للجلسة</span>
+        </button>
+      </div>
+
+      <!-- 4. Optical Absorption Spectrum Chart -->
+      <div class="panel-section">
+        <div class="section-header">
+          <span class="section-title">
+            <span>منحنى امتصاص الضوء</span>
+            <span class="badge ltr-text">Absorption Curves</span>
+          </span>
+        </div>
+        <div class="chart-box">
+          <canvas id="absorptionCanvas"></canvas>
+        </div>
+        <div style="font-size: 0.7rem; color: var(--text-muted); line-height: 1.4;">
+          يُظهر المنحنى كيف ينخفض امتصاص الميلانين مع زيادة الطول الموجي، مما يتيح لشعاع Nd:YAG 1064nm المرور الآمن عبر البشرة الداكنة.
+        </div>
+      </div>
+
+      <!-- 5. Clinical Pearls / Rules of Thumb -->
+      <div class="panel-section">
+        <div class="section-header">
+          <span class="section-title">
+            <span>قواعد السلامة السريرية</span>
+            <span class="badge">Safety First</span>
+          </span>
+        </div>
+        <ul class="advice-list">
+          <li>
+            <span><strong>Alexandrite 755nm:</strong> فعال جداً للبشرة I-III، وممنوع على البشرة الداكنة V-VI لتفادي الحروق.</span>
+          </li>
+          <li>
+            <span><strong>Diode 808nm:</strong> خيار ممتاز ومتوازن للبشرة من I إلى IV مع تبريد مستمر.</span>
+          </li>
+          <li>
+            <span><strong>Nd:YAG 1064nm:</strong> الخيار الوحيد الآمن سريرياً للبشرة الداكنة جداً (Type V و VI).</span>
+          </li>
+          <li>
+            <span><strong>الشعر الأبيض/الرمادي:</strong> لا يمتص أي ليزر لعدم وجود ميلانين، ويتطلب التحليل الكهربائي.</span>
+          </li>
+        </ul>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <!-- Post-Shot Clinical Outcome Modal -->
+  <div id="shotResultModal" class="result-modal-backdrop">
+    <div class="result-modal-card">
+      <div class="result-modal-header">
+        <h3 id="resultModalTitle">✓ نتيجة النبضة السريرية</h3>
+        <button id="closeResultModal" class="btn-close-modal">✕</button>
+      </div>
+      <div id="resultModalBadge" class="result-status-badge badge-success">تم القضاء على البصيلة بنجاح</div>
+      <div id="resultModalDetails" class="result-modal-details"></div>
+      <div id="resultModalSummary" class="result-modal-summary"></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top: 14px;">
+        <button id="modalSlowMoReplayBtn" class="btn-secondary-action">إعادة بالعرض البطيء (Replay)</button>
+        <button onclick="document.getElementById('shotResultModal').classList.remove('show');" class="btn-ack-result">متابعة الفحص</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Clinical Treatment Report Modal -->
+  <div id="treatmentReportModal" class="result-modal-backdrop">
+    <div class="result-modal-card" style="max-width: 540px;">
+      <div class="result-modal-header">
+        <h3>📋 التقرير السريري الشامل للجلسة (Clinical Session Report)</h3>
+        <button onclick="document.getElementById('treatmentReportModal').classList.remove('show');" class="btn-close-modal">✕</button>
+      </div>
+      <div id="treatmentReportContent" class="report-content-body"></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top: 16px;">
+        <button id="printReportBtn" class="btn-secondary-action">طباعة / تصدير التقرير</button>
+        <button onclick="document.getElementById('treatmentReportModal').classList.remove('show');" class="btn-ack-result">إغلاق التقرير</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Local Standalone Core Libraries -->
+  <script src="js/libs/three.min.js"></script>
+  <script src="js/libs/OrbitControls.js"></script>
+  <script>
+    if (!window.THREE) {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+      document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"><\/script>');
+    }
+  </script>
+
+  <!-- Complete Standalone Application Engine (No CORS, Zero External Dependencies) -->
+  <script src="js/app.js?v=4.0"></script>
+</body>
+</html>
